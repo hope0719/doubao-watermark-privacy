@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>豆包视频去水印 · 隐私政策</title>
+<meta name="description" content="豆包视频去水印浏览器扩展隐私政策：不收集任何用户个人数据，所有解析均在本地完成。" />
+<style>
+  :root {
+    --bg: #f5f7fb;
+    --card: #ffffff;
+    --ink: #1f2937;
+    --muted: #6b7280;
+    --line: #e6e9f0;
+    --brand: #4f46e5;
+    --brand2: #7c3aed;
+    --ok: #059669;
+    --ok-bg: #ecfdf5;
+    --shadow: 0 1px 2px rgba(16,24,40,.04), 0 8px 28px rgba(16,24,40,.06);
+    --radius: 18px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Header */
+  header {
+    position: sticky; top: 0; z-index: 20;
+    backdrop-filter: saturate(160%) blur(12px);
+    background: rgba(255,255,255,.82);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav {
+    max-width: 880px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 22px;
+  }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 15px; }
+  .brand .logo {
+    width: 30px; height: 30px; border-radius: 9px;
+    background: linear-gradient(135deg, var(--brand), var(--brand2));
+    display: grid; place-items: center; color: #fff; font-size: 16px;
+    box-shadow: 0 4px 12px rgba(79,70,229,.35);
+  }
+  .toggle {
+    display: inline-flex; background: #eef0f6; border-radius: 999px; padding: 4px; gap: 2px;
+  }
+  .toggle button {
+    border: 0; background: transparent; cursor: pointer;
+    font: inherit; font-size: 13px; font-weight: 600; color: var(--muted);
+    padding: 6px 14px; border-radius: 999px; transition: .2s;
+  }
+  .toggle button.active { background: #fff; color: var(--brand); box-shadow: var(--shadow); }
+
+  /* Layout */
+  main { max-width: 880px; margin: 0 auto; padding: 0 22px 64px; }
+
+  /* Hero */
+  .hero {
+    margin: 36px 0 28px; padding: 40px 36px;
+    border-radius: 24px; color: #fff; position: relative; overflow: hidden;
+    background: radial-gradient(120% 140% at 0% 0%, #6366f1 0%, #4f46e5 45%, #4338ca 100%);
+    box-shadow: 0 18px 40px rgba(67,56,202,.30);
+  }
+  .hero::after {
+    content: ""; position: absolute; right: -60px; top: -60px;
+    width: 240px; height: 240px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,.22), transparent 70%);
+  }
+  .hero h1 { margin: 0 0 10px; font-size: 28px; letter-spacing: .5px; }
+  .hero p { margin: 0; opacity: .92; font-size: 15px; max-width: 560px; }
+  .hero .meta { margin-top: 18px; font-size: 13px; opacity: .85; display: inline-flex; gap: 8px; align-items: center;
+    background: rgba(255,255,255,.15); padding: 6px 14px; border-radius: 999px; }
+
+  /* No-data banner */
+  .banner {
+    display: flex; gap: 16px; align-items: flex-start;
+    background: var(--ok-bg); border: 1px solid #bbf7d0; color: #065f46;
+    border-radius: var(--radius); padding: 20px 22px; margin-bottom: 26px;
+  }
+  .banner .ic {
+    flex: none; width: 38px; height: 38px; border-radius: 11px; background: #fff; color: var(--ok);
+    display: grid; place-items: center; box-shadow: var(--shadow);
+  }
+  .banner h3 { margin: 2px 0 4px; font-size: 16px; color: #047857; }
+  .banner p { margin: 0; font-size: 14px; }
+
+  /* Sections */
+  .card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 26px 28px; margin-bottom: 18px;
+    box-shadow: var(--shadow);
+  }
+  .card .head { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; }
+  .num {
+    flex: none; width: 30px; height: 30px; border-radius: 9px; color: #fff; font-weight: 700; font-size: 14px;
+    display: grid; place-items: center; background: linear-gradient(135deg, var(--brand), var(--brand2));
+  }
+  .card h2 { margin: 0; font-size: 18px; }
+  .card p { margin: 0 0 12px; color: #374151; font-size: 15px; }
+  .card p:last-child { margin-bottom: 0; }
+  .card ul { margin: 6px 0 12px; padding-left: 4px; list-style: none; }
+  .card ul li { position: relative; padding-left: 22px; margin-bottom: 12px; color: #374151; font-size: 15px; }
+  .card ul li::before {
+    content: ""; position: absolute; left: 4px; top: 9px; width: 8px; height: 8px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--brand), var(--brand2));
+  }
+  .card ul li b { color: var(--ink); }
+  .card ul li:last-child { margin-bottom: 0; }
+
+  footer { text-align: center; color: var(--muted); font-size: 13px; padding: 30px 22px 10px; }
+  footer a { color: var(--brand); text-decoration: none; }
+
+  @media (max-width: 600px) {
+    .hero { padding: 30px 22px; }
+    .hero h1 { font-size: 23px; }
+    .card { padding: 22px 18px; }
+  }
+</style>
+</head>
+<body data-lang="zh">
+  <header>
+    <div class="nav">
+      <div class="brand"><span class="logo">豆</span><span data-i18n="brand">豆包视频去水印</span></div>
+      <div class="toggle">
+        <button data-lang-btn="zh" class="active">中文</button>
+        <button data-lang-btn="en">EN</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1 data-i18n="heroTitle">我们重视您的隐私</h1>
+      <p data-i18n="heroDesc">本扩展程序不收集、不存储、不上传您的任何个人数据。以下说明我们如何处理信息。</p>
+      <div class="meta">● <span data-i18n="lastUpdated">最后更新：2026 年 7 月 15 日</span></div>
+    </section>
+
+    <section class="banner">
+      <div class="ic">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+      </div>
+      <div>
+        <h3 data-i18n="noDataTitle">零数据收集</h3>
+        <p data-i18n="noDataDesc">本扩展程序完全在您浏览器本地运行，不向任何远程服务器发送您的个人信息或浏览数据。</p>
+      </div>
+    </section>
+
+    <div id="sections"></div>
+
+    <footer>
+      <span data-i18n="footer">本隐私政策由「豆包视频去水印」扩展程序发布，并随版本更新同步修订。</span>
+    </footer>
+  </main>
+
+<script>
+const I18N = {
+  zh: {
+    brand: "豆包视频去水印",
+    heroTitle: "我们重视您的隐私",
+    heroDesc: "本扩展程序不收集、不存储、不上传您的任何个人数据。以下说明我们如何处理信息。",
+    lastUpdated: "最后更新：2026 年 7 月 15 日",
+    noDataTitle: "零数据收集",
+    noDataDesc: "本扩展程序完全在您浏览器本地运行，不向任何远程服务器发送您的个人信息或浏览数据。",
+    footer: "本隐私政策由「豆包视频去水印」扩展程序发布，并随版本更新同步修订。",
+    sections: [
+      { n: "01", title: "一、概述",
+        html: `<p>「豆包视频去水印」（以下简称“本扩展程序”）是一款为豆包网页平台提供无水印视频、原图素材解析提取服务的浏览器扩展程序。其唯一用途是：帮助用户在豆包对话页、分享页面一键解析媒体资源，导出不含平台水印的视频与图片文件，仅供用户保存自身合法生成的豆包素材。</p>
+        <p>我们高度重视您的隐私。本隐私政策说明本扩展程序如何（以及是否）收集、使用与共享信息。</p>` },
+      { n: "02", title: "二、我们收集的信息",
+        html: `<p><b>我们不会收集您的任何个人数据。</b>本扩展程序不收集、不存储、不上传您的任何个人信息或浏览数据。具体而言，我们不会收集以下任何类别的用户数据：</p>
+        <ul>
+          <li><b>个人身份信息</b>——姓名、地址、电子邮件、年龄、身份证号等；</li>
+          <li><b>健康与医疗信息</b>；</li>
+          <li><b>财务与支付信息</b>；</li>
+          <li><b>身份验证信息</b>——密码、凭证、安全问题等；</li>
+          <li><b>个人通信内容</b>——邮件、短信、聊天记录等；</li>
+          <li><b>地理位置信息</b>；</li>
+          <li><b>网络浏览历史</b>；</li>
+          <li><b>用户活动数据</b>——点击、按键、滚动、鼠标位置等；</li>
+          <li><b>网站内容</b>——文本、图像、音视频、超链接等。</li>
+        </ul>
+        <p>所有素材解析均在您的浏览器本地完成，媒体文件由浏览器直接下载到您的设备，不会经过任何远程服务器。</p>` },
+      { n: "03", title: "三、权限说明",
+        html: `<p>本扩展程序申请的每一项权限，都仅用于完成“素材解析、本地下载、快捷复制链接、右键快捷操作”这一核心功能，不存在与素材提取无关的额外行为：</p>
+        <ul>
+          <li><b>activeTab / tabs（活动标签页）</b>：仅在您主动点击扩展图标时，临时获取当前标签页页面内容，用于读取豆包页面内的视频、图片资源地址；仅访问当前激活页面，不会自动读取其他网页，无后台静默采集。</li>
+          <li><b>host permissions（主机权限 · 豆包官方域名）</b>：仅用于匹配豆包官方网页域名，拦截页面媒体资源接口，提取无水印原图与视频地址；权限仅作用于目标网站，不会访问或获取任何第三方网站数据。</li>
+          <li><b>download（下载）</b>：解析完成后调用浏览器下载接口，将处理后的媒体文件保存至您的本地设备；无额外文件读写或上传操作。</li>
+          <li><b>contextMenus（右键菜单）</b>：在页面右键菜单添加快捷解析入口，仅在您主动右键操作时展示，无后台自动弹窗或自动运行逻辑。</li>
+          <li><b>clipboardWrite（剪贴板写入）</b>：解析出素材直链后支持一键复制链接至剪贴板，仅响应您手动复制操作，不会私自读取或修改剪贴板其他内容。</li>
+        </ul>` },
+      { n: "04", title: "四、远程代码",
+        html: `<p><b>本扩展程序不包含任何远程代码。</b>所有功能逻辑均打包在扩展程序安装包内，不存在对外部 JavaScript / Wasm 文件的引用、外部模块加载，或通过 <code>eval()</code> 执行远程字符串的情况。</p>` },
+      { n: "05", title: "五、数据的使用与共享",
+        html: `<p>除用于本扩展程序的单一用途（无水印素材解析与本地保存）之外，我们郑重承诺：</p>
+        <ul>
+          <li>我们不会将任何用户数据出售或转让给第三方；</li>
+          <li>我们不会将用户数据用于与单一用途无关的用途，也不会将数据传输给其他用途；</li>
+          <li>我们不会使用或转移用户数据来确定信用度或用于借贷目的。</li>
+        </ul>` },
+      { n: "06", title: "六、儿童隐私",
+        html: `<p>本扩展程序不面向儿童，我们不会有意收集任何年龄段用户的个人数据。</p>` },
+      { n: "07", title: "七、政策变更",
+        html: `<p>若本隐私政策发生变更，更新版本将发布在本页面，并标注新的“最后更新日期”。</p>` },
+      { n: "08", title: "八、联系我们",
+        html: `<p>如您对本隐私政策有任何疑问，可通过 Chrome 网上应用商店中本扩展程序的商品页面与我们联系。</p>` }
+    ]
+  },
+  en: {
+    brand: "Doubao Video Watermark Remover",
+    heroTitle: "Your privacy matters to us",
+    heroDesc: "This extension does not collect, store, or upload any of your personal data. Below we explain how (and whether) we handle information.",
+    lastUpdated: "Last updated: July 15, 2026",
+    noDataTitle: "Zero data collection",
+    noDataDesc: "This extension runs entirely locally in your browser and never sends your personal or browsing data to any remote server.",
+    footer: "This Privacy Policy is published by the “Doubao Video Watermark Remover” extension and is updated together with new versions.",
+    sections: [
+      { n: "01", title: "1. Overview",
+        html: `<p>The “Doubao Video Watermark Remover” (the “Extension”) is a browser extension that provides watermark-free video and original-image parsing/extraction for the Doubao web platform. Its sole purpose is to let users one-click parse media on Doubao conversation and share pages and export watermark-free videos and images, solely for saving their own lawfully generated Doubao materials.</p>
+        <p>We highly value your privacy. This policy explains how (and whether) the Extension collects, uses, and shares information.</p>` },
+      { n: "02", title: "2. Information we collect",
+        html: `<p><b>We do not collect any of your personal data.</b> The Extension does not collect, store, or upload any personal or browsing data. Specifically, we do not collect any of the following categories:</p>
+        <ul>
+          <li><b>Personally identifiable information</b> — name, address, email, age, ID numbers, etc.;</li>
+          <li><b>Health information</b>;</li>
+          <li><b>Financial and payment information</b>;</li>
+          <li><b>Authentication information</b> — passwords, credentials, security questions, etc.;</li>
+          <li><b>Personal communications</b> — email, SMS, chat messages, etc.;</li>
+          <li><b>Location information</b>;</li>
+          <li><b>Web browsing history</b>;</li>
+          <li><b>User activity</b> — clicks, keystrokes, scrolling, cursor position, etc.;</li>
+          <li><b>Website content</b> — text, images, audio, video, hyperlinks, etc.</li>
+        </ul>
+        <p>All parsing is performed locally in your browser, and media files are downloaded directly to your device by the browser — they never pass through any remote server.</p>` },
+      { n: "03", title: "3. Permission justification",
+        html: `<p>Every permission requested by the Extension serves only its core function — “media parsing, local download, quick link copy, and right-click shortcuts” — with no behavior unrelated to material extraction:</p>
+        <ul>
+          <li><b>activeTab / tabs</b>: Only when you actively click the extension icon do we temporarily access the current tab to read video/image resource URLs on Doubao pages. Only the active tab is accessed; other pages are never read automatically, and there is no background silent collection.</li>
+          <li><b>host permissions (Doubao official domains)</b>: Used solely to match Doubao’s official domains, intercept media resource interfaces, and extract watermark-free original images and videos. Permissions apply only to the target site and never access any third-party website.</li>
+          <li><b>download</b>: After parsing, we call the browser download API to save processed media to your local device. No extra file reads/writes or uploads occur.</li>
+          <li><b>contextMenus</b>: Adds a quick-parse entry to the right-click menu, shown only when you actively right-click. No background pop-ups or auto-run logic.</li>
+          <li><b>clipboardWrite</b>: Lets you one-click copy the parsed direct link to the clipboard, triggered only by your manual action. We never read or modify other clipboard content.</li>
+        </ul>` },
+      { n: "04", title: "4. Remote code",
+        html: `<p><b>This Extension contains no remote code.</b> All logic is packaged inside the extension; there are no references to external JavaScript/Wasm files, no external module loading, and no execution of remote strings via <code>eval()</code>.</p>` },
+      { n: "05", title: "5. Use and sharing of data",
+        html: `<p>Beyond the Extension’s single purpose (watermark-free parsing and local saving), we solemnly commit:</p>
+        <ul>
+          <li>We will not sell or transfer any user data to third parties;</li>
+          <li>We will not use user data for purposes unrelated to the single purpose, nor transfer it to other uses;</li>
+          <li>We will not use or transfer user data to determine creditworthiness or for lending purposes.</li>
+        </ul>` },
+      { n: "06", title: "6. Children's privacy",
+        html: `<p>The Extension is not directed at children, and we do not knowingly collect personal data from users of any age.</p>` },
+      { n: "07", title: "7. Changes to this policy",
+        html: `<p>If this policy changes, the updated version will be published on this page with a new “Last updated” date.</p>` },
+      { n: "08", title: "8. Contact us",
+        html: `<p>If you have any questions about this privacy policy, you may contact us through the Extension’s listing page on the Chrome Web Store.</p>` }
+    ]
+  }
+};
+
+function render(lang) {
+  const d = I18N[lang];
+  document.body.dataset.lang = lang;
+  document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+  document.title = d.brand + ' · ' + (lang === 'zh' ? '隐私政策' : 'Privacy Policy');
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const k = el.getAttribute('data-i18n');
+    if (d[k] != null) el.textContent = d[k];
+  });
+  const wrap = document.getElementById('sections');
+  wrap.innerHTML = d.sections.map(s => `
+    <section class="card">
+      <div class="head"><span class="num">${s.n}</span><h2>${s.title}</h2></div>
+      ${s.html}
+    </section>`).join('');
+  document.querySelectorAll('[data-lang-btn]').forEach(b => {
+    b.classList.toggle('active', b.getAttribute('data-lang-btn') === lang);
+  });
+}
+
+document.querySelectorAll('[data-lang-btn]').forEach(b => {
+  b.addEventListener('click', () => {
+    const lang = b.getAttribute('data-lang-btn');
+    localStorage.setItem('pp-lang', lang);
+    render(lang);
+  });
+});
+
+const saved = localStorage.getItem('pp-lang') || 'zh';
+render(saved);
+</script>
+</body>
+</html>
