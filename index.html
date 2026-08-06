@@ -166,7 +166,7 @@ const I18N = {
     brand: "豆包视频去水印",
     heroTitle: "我们重视您的隐私",
     heroDesc: "本扩展程序不收集、不存储、不上传您的任何个人数据。以下说明我们如何处理信息。",
-    lastUpdated: "最后更新：2026 年 7 月 15 日",
+    lastUpdated: "最后更新：2026 年 8 月 7 日",
     noDataTitle: "零数据收集",
     noDataDesc: "本扩展程序完全在您浏览器本地运行，不向任何远程服务器发送您的个人信息或浏览数据。",
     footer: "本隐私政策由「豆包视频去水印」扩展程序发布，并随版本更新同步修订。",
@@ -189,13 +189,13 @@ const I18N = {
         </ul>
         <p>所有素材解析均在您的浏览器本地完成，媒体文件由浏览器直接下载到您的设备，不会经过任何远程服务器。</p>` },
       { n: "03", title: "三、权限说明",
-        html: `<p>本扩展程序申请的每一项权限，都仅用于完成“素材解析、本地下载、快捷复制链接、右键快捷操作”这一核心功能，不存在与素材提取无关的额外行为：</p>
+        html: `<p>本扩展程序申请的每一项权限，都仅用于完成“拦截并提取无水印媒体资源、本地下载、保存使用偏好”这一核心功能，不存在与素材提取无关的额外行为：</p>
         <ul>
-          <li><b>activeTab / tabs（活动标签页）</b>：仅在您主动点击扩展图标时，临时获取当前标签页页面内容，用于读取豆包页面内的视频、图片资源地址；仅访问当前激活页面，不会自动读取其他网页，无后台静默采集。</li>
-          <li><b>host permissions（主机权限 · 豆包官方域名）</b>：仅用于匹配豆包官方网页域名，拦截页面媒体资源接口，提取无水印原图与视频地址；权限仅作用于目标网站，不会访问或获取任何第三方网站数据。</li>
-          <li><b>download（下载）</b>：解析完成后调用浏览器下载接口，将处理后的媒体文件保存至您的本地设备；无额外文件读写或上传操作。</li>
-          <li><b>contextMenus（右键菜单）</b>：在页面右键菜单添加快捷解析入口，仅在您主动右键操作时展示，无后台自动弹窗或自动运行逻辑。</li>
-          <li><b>clipboardWrite（剪贴板写入）</b>：解析出素材直链后支持一键复制链接至剪贴板，仅响应您手动复制操作，不会私自读取或修改剪贴板其他内容。</li>
+          <li><b>Debugger（调试权限）</b>：用于在您访问豆包 / Dola 网页时，按严格的主机名校验附加到当前标签页，拦截页面的媒体资源接口，提取无水印的原图与视频地址。调试范围仅限目标网站，离开目标网站后会自动断开连接；您也可以切换到手动模式，仅在需要时开启当前页。</li>
+          <li><b>tabs（标签页）</b>：用于识别并操作当前激活的标签页，以便附加调试器、读取媒体资源上下文；仅作用于目标页面，不会自动读取其他网页，无后台静默采集。</li>
+          <li><b>downloads（下载）</b>：解析完成后调用浏览器下载接口，将处理后的无水印媒体文件保存至您的本地设备；无额外文件读写或上传操作。</li>
+          <li><b>storage（本地存储）</b>：仅用于在您的设备本地保存使用偏好设置（如自动 / 手动拦截模式、诊断日志开关）。不保存聊天内容、账号信息或下载的媒体内容，数据不上传、不同步、不分享给任何第三方。</li>
+          <li><b>host permissions（主机权限）</b>：仅匹配豆包及其相关字节跳动系域名（<code>doubao.com</code>、<code>dola.com</code>、<code>byteintlapi.com</code>、<code>snssdk.com</code>），用于拦截这些域名下的媒体资源接口，提取无水印原图与视频地址；权限仅作用于目标网站，不会访问或获取任何第三方网站数据。</li>
         </ul>` },
       { n: "04", title: "四、远程代码",
         html: `<p><b>本扩展程序不包含任何远程代码。</b>所有功能逻辑均打包在扩展程序安装包内，不存在对外部 JavaScript / Wasm 文件的引用、外部模块加载，或通过 <code>eval()</code> 执行远程字符串的情况。</p>` },
@@ -211,14 +211,14 @@ const I18N = {
       { n: "07", title: "七、政策变更",
         html: `<p>若本隐私政策发生变更，更新版本将发布在本页面，并标注新的“最后更新日期”。</p>` },
       { n: "08", title: "八、联系我们",
-        html: `<p>如您对本隐私政策有任何疑问，可通过邮箱 <a href="mailto:aigood1024@gmail.com">aigood1024@gmail.com</a> 与我们联系，或在浏览器扩展商店的商品页面留言反馈。</p>` }
+        html: `<p>如您对本隐私政策有任何疑问，可通过邮箱 <a href="mailto:aigood1024@gmail.com">aigood1024@gmail.com</a> 与我们联系，也可添加作者微信号 <b>lmfh2022</b>（插件内“反馈建议”按钮可一键复制），或在浏览器扩展商店的商品页面留言反馈。</p>` }
     ]
   },
   en: {
     brand: "Doubao Video Watermark Remover",
     heroTitle: "Your privacy matters to us",
     heroDesc: "This extension does not collect, store, or upload any of your personal data. Below we explain how (and whether) we handle information.",
-    lastUpdated: "Last updated: July 15, 2026",
+    lastUpdated: "Last updated: August 7, 2026",
     noDataTitle: "Zero data collection",
     noDataDesc: "This extension runs entirely locally in your browser and never sends your personal or browsing data to any remote server.",
     footer: "This Privacy Policy is published by the “Doubao Video Watermark Remover” extension and is updated together with new versions.",
@@ -241,13 +241,13 @@ const I18N = {
         </ul>
         <p>All parsing is performed locally in your browser, and media files are downloaded directly to your device by the browser — they never pass through any remote server.</p>` },
       { n: "03", title: "3. Permission justification",
-        html: `<p>Every permission requested by the Extension serves only its core function — “media parsing, local download, quick link copy, and right-click shortcuts” — with no behavior unrelated to material extraction:</p>
+        html: `<p>Every permission requested by the Extension serves only its core function — “intercepting and extracting watermark-free media, local download, and saving user preferences” — with no behavior unrelated to material extraction:</p>
         <ul>
-          <li><b>activeTab / tabs</b>: Only when you actively click the extension icon do we temporarily access the current tab to read video/image resource URLs on Doubao pages. Only the active tab is accessed; other pages are never read automatically, and there is no background silent collection.</li>
-          <li><b>host permissions (Doubao official domains)</b>: Used solely to match Doubao’s official domains, intercept media resource interfaces, and extract watermark-free original images and videos. Permissions apply only to the target site and never access any third-party website.</li>
-          <li><b>download</b>: After parsing, we call the browser download API to save processed media to your local device. No extra file reads/writes or uploads occur.</li>
-          <li><b>contextMenus</b>: Adds a quick-parse entry to the right-click menu, shown only when you actively right-click. No background pop-ups or auto-run logic.</li>
-          <li><b>clipboardWrite</b>: Lets you one-click copy the parsed direct link to the clipboard, triggered only by your manual action. We never read or modify other clipboard content.</li>
+          <li><b>Debugger</b>: When you visit Doubao / Dola pages, it attaches to the current tab under strict host validation to intercept media resource interfaces and extract watermark-free original images and videos. Debugging is limited to the target site and disconnects automatically when you leave it; you can also switch to manual mode and enable it only for the current page on demand.</li>
+          <li><b>tabs</b>: Used to identify and operate the active tab so the debugger can attach and read media context. It acts only on the target page; other pages are never read automatically, and there is no background silent collection.</li>
+          <li><b>downloads</b>: After parsing, we call the browser download API to save the processed watermark-free media to your local device. No extra file reads/writes or uploads occur.</li>
+          <li><b>storage</b>: Used only to persist your preference settings locally (e.g. auto/manual interception mode, diagnostics toggle). We do not store chat content, account info, or downloaded media, and the data is never uploaded, synced, or shared with any third party.</li>
+          <li><b>host permissions</b>: Used solely to match Doubao and related ByteDance domains (<code>doubao.com</code>, <code>dola.com</code>, <code>byteintlapi.com</code>, <code>snssdk.com</code>) to intercept media interfaces on those domains and extract watermark-free original images and videos. Permissions apply only to the target site and never access any third-party website.</li>
         </ul>` },
       { n: "04", title: "4. Remote code",
         html: `<p><b>This Extension contains no remote code.</b> All logic is packaged inside the extension; there are no references to external JavaScript/Wasm files, no external module loading, and no execution of remote strings via <code>eval()</code>.</p>` },
@@ -263,7 +263,7 @@ const I18N = {
       { n: "07", title: "7. Changes to this policy",
         html: `<p>If this policy changes, the updated version will be published on this page with a new “Last updated” date.</p>` },
       { n: "08", title: "8. Contact us",
-        html: `<p>If you have any questions about this privacy policy, you may contact us at <a href="mailto:aigood1024@gmail.com">aigood1024@gmail.com</a>, or through the Extension’s listing page on your browser’s extension store.</p>` }
+        html: `<p>If you have any questions about this privacy policy, you may contact us at <a href="mailto:aigood1024@gmail.com">aigood1024@gmail.com</a>, add the author’s WeChat ID <b>lmfh2022</b> (the in-extension “Feedback” button copies it with one click), or message us via the Extension’s listing page on your browser’s extension store.</p>` }
     ]
   }
 };
